@@ -7,5 +7,6 @@ Permite crear un modelo general, para un método y una clase que se desea implem
 - Cuando el compilador traduce el método genérico en código byte de java, elimina la sección de parámetros de tipo y reemplaza los parámetros de tipo con tipos reales a este proceso se le conoce como **borrado**
 - De manera predeterminada, todos los tipos genéricos se reemplaza con el tipo **Object**
  
-
+## **Clase Genérica**
+- Las clases genéricas pueden comprenderse en forma independiente del tipo del elemento que manipula
 

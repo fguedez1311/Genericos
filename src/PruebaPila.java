@@ -1,8 +1,9 @@
+import javax.print.Doc;
+
 public class PruebaPila {
-    private double[] elementosDouble = { 1.1, 2.2, 3.3, 4.4, 5.5, 6.6 };
-    private int[] elementosInteger = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
-    private PilaGenerica<Double> pilaDouble;
-    private PilaGenerica<Integer> pilaInteger;
+    private Double[] elementosDouble = { 1.1, 2.2, 3.3, 4.4, 5.5, 6.6 };
+    private Integer[] elementosInteger = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+    
 
     /**
      * Prueba objeto pila
@@ -11,21 +12,24 @@ public class PruebaPila {
      * @throws Exception
      */
     public void pruebaPilas() {
-        pilaDouble = new PilaGenerica<Double>(5);
-        pilaInteger = new PilaGenerica<Integer>(10);
-        pruebaPushDouble();
-        pruebaPopDouble();
-        pruebaPushInteger();
-        pruebaPopInteger();
+        PilaGenerica pilaTipoCrudo1=new PilaGenerica(5);
+        PilaGenerica pilaTipoCrudo2=new PilaGenerica<Double>(5);
+        PilaGenerica<Integer> pilaInteger=new PilaGenerica(10);
+        probarPush("pilatipoCrudo1",pilaTipoCrudo1,elementosDouble);
+        probarPop("pilTipoCrudo1",pilaTipoCrudo1);
+        probarPush("pilatipoCrudo2",pilaTipoCrudo2,elementosDouble);
+        probarPop("pilTipoCrudo2",pilaTipoCrudo2);
+        probarPush("pilaInteger",pilaInteger,elementosInteger);
+        probarPop("pilaInteger",pilaInteger);
 
     }
 
-    public void pruebaPushDouble() {
+    public <T> void probarPush(String nombre,PilaGenerica<T> pilaGenerica,T[] elementos) {
         try {
-            System.out.println("\nMetiendo elemnto en la pila Double");
-            for (double elemento : elementosDouble) {
-                System.out.printf("%.1f ", elemento);
-                pilaDouble.push(elemento);
+            System.out.printf("\nMetiendo elementos a %s\n",nombre);
+            for (T elemento : elementos) {
+                System.out.printf("%s ", elemento);
+                pilaGenerica.push(elemento);
             }
         } catch (ExceptionPilaLlena exceptionPilaLlena) {
             System.err.println();
@@ -34,47 +38,22 @@ public class PruebaPila {
 
     }
 
-    private void pruebaPopDouble() {
+    public <T> void probarPop(String nombre,PilaGenerica<T> pila) {
         try {
-            System.out.println("\nSacanado elementos de pilaDouble");
-            double valorAsacar;
+            System.out.printf("\nSacanado elementos de %s\n",nombre);
+            T valorAsacar;
             while (true) {
-                valorAsacar = pilaDouble.pop();
-                System.out.printf("%.1f ", valorAsacar);
-            }
+                valorAsacar = pila.pop();
+                System.out.printf("%s ", valorAsacar);
+            } 
         } catch (ExceptionPilaVacia exceptionPilaVacia) {
             System.err.println();
             exceptionPilaVacia.printStackTrace();
         }
     }
 
-    private void pruebaPushInteger() {
-        try {
-            System.out.println("\nMetiendo elementos apilaInteger ");
-            for (Integer elemento : elementosInteger) {
-                System.out.printf("%d ", elemento);
-                pilaInteger.push(elemento);
-            }
-
-        } catch (ExceptionPilaLlena exceptionPilaLlena) {
-            System.err.println();
-            exceptionPilaLlena.printStackTrace();
-        }
-    }
-
-    private void pruebaPopInteger() {
-        try {
-            System.out.println("\nSacanado elementos de pilaInteger");
-            Integer valorAsacar;
-            while (true) {
-                valorAsacar = pilaInteger.pop();
-                System.out.printf("%d ", valorAsacar);
-            }
-        } catch (ExceptionPilaVacia exceptionPilaVacia) {
-            System.err.println();
-            exceptionPilaVacia.printStackTrace();
-        }
-    }
+    
+  
 
     public static void main(String[] args) throws Exception {
         PruebaPila aplicacion = new PruebaPila();
